@@ -49,12 +49,11 @@ source "amazon-ebs" "debian" {
 }
 
 source "digitalocean" "debian" {
-  // you need the env variable DIGITALOCEAN_ACCESS_TOKEN locally
   droplet_name  = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
   snapshot_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
   image         = "debian-11-x64"
   region        = "lon1"
-  size          = "s-1vcpu-2gb"
+  size          = "s-1vcpu-1gb"
   ssh_username  = "root"
   tags = [
     "MARKETPLACE",
