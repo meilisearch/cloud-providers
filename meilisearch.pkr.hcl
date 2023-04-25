@@ -25,7 +25,7 @@ packer {
     }
     googlecompute = {
       version = ">= 1.1.1"
-      source = "github.com/hashicorp/googlecompute"
+      source  = "github.com/hashicorp/googlecompute"
     }
   }
 }
@@ -50,12 +50,12 @@ source "amazon-ebs" "debian" {
 
 source "digitalocean" "debian" {
   // you need the env variable DIGITALOCEAN_ACCESS_TOKEN locally
-  droplet_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
-  snapshot_name= "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
-  image        = "debian-11-x64"
-  region       = "lon1"
-  size         = "s-1vcpu-2gb"
-  ssh_username = "root"
+  droplet_name  = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  snapshot_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  image         = "debian-11-x64"
+  region        = "lon1"
+  size          = "s-1vcpu-2gb"
+  ssh_username  = "root"
   tags = [
     "MARKETPLACE",
     "AUTOBUILD",
@@ -63,12 +63,12 @@ source "digitalocean" "debian" {
 }
 
 source "googlecompute" "debian" {
-  image_name = lower(replace("${var.image_name}-${var.meilisearch_version}-${var.base-os-version}", ".", "-"))
-  project_id = "meilisearchimage"
+  image_name   = lower(replace("${var.image_name}-${var.meilisearch_version}-${var.base-os-version}", ".", "-"))
+  project_id   = "meilisearchimage"
   source_image = "debian-11-bullseye-v20230411"
   ssh_username = "packer"
   machine_type = "e2-small"
-  zone = "us-central1-a"
+  zone         = "us-central1-a"
 }
 
 build {
