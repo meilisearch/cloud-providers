@@ -3,13 +3,13 @@
 # Install packages
 apt-get install -y wget git curl gcc make
 
-# Download MeiliSearch
-wget --directory-prefix=/usr/bin/ -O /usr/bin/meilisearch https://github.com/meilisearch/MeiliSearch/releases/download/$MEILISEARCH_VERSION/meilisearch-linux-amd64
+# Download Meilisearch
+wget --directory-prefix=/usr/bin/ -O /usr/bin/meilisearch https://github.com/meilisearch/Meilisearch/releases/download/$MEILISEARCH_VERSION/meilisearch-linux-amd64
 
 # Change perimission for execution
 chmod +x /usr/bin/meilisearch
 
-# Launch MeiliSearch
+# Launch Meilisearch
 systemctl enable meilisearch.service
 
 touch $MEILISEARCH_ENV_PATH
