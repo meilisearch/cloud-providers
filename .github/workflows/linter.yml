@@ -1,0 +1,36 @@
+name: Linter
+
+on:
+  pull_request:
+  push:
+    # trying and staging branches are for BORS config
+    branches:
+      - trying
+      - staging
+      - main
+
+
+env:
+  PACKER_VERSION: "latest"
+  DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+jobs:
+  linter:
+    name: linter-check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup `packer`
+      uses: hashicorp/setup-packer@main
+      with:
+        version: ${{ env.PACKER_VERSION }}
+
+    - name: Run `packer init`
+      run: "packer init ."
+
+    - name: Run `packer validate`
+      run: "packer validate ."
+
+    - name: Run `packer fmt`
+      run: "packer fmt -check ."
