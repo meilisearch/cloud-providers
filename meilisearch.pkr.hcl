@@ -31,10 +31,10 @@ packer {
 }
 
 source "amazon-ebs" "debian" {
-  ami_name        = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  ami_name        = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
   instance_type   = "t2.small"
   region          = "us-east-1"
-  ami_description = "MeiliSearch-${var.meilisearch_version} running on in ${var.base-os-version}"
+  ami_description = "Meilisearch-${var.meilisearch_version} running on in ${var.base-os-version}"
   source_ami_filter {
     filters = {
       name                = "debian-11-amd64*"
@@ -50,8 +50,8 @@ source "amazon-ebs" "debian" {
 
 source "digitalocean" "debian" {
   // you need the env variable DIGITALOCEAN_ACCESS_TOKEN locally
-  droplet_name  = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
-  snapshot_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  droplet_name  = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
+  snapshot_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
   image         = "debian-11-x64"
   region        = "lon1"
   size          = "s-1vcpu-2gb"
