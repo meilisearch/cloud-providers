@@ -63,8 +63,7 @@ source "digitalocean" "debian" {
 }
 
 source "googlecompute" "debian" {
-  //TODO: The image name has to be fixed
-  // image_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  image_name = lower(replace("${var.image_name}-${var.meilisearch_version}-${var.base-os-version}", ".", "-"))
   project_id = "meilisearchimage"
   source_image = "debian-11-bullseye-v20230411"
   ssh_username = "packer"
