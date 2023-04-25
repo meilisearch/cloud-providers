@@ -1,15 +1,7 @@
 variables {
-  image_name            = "poc-packer-meilisearch"
-  base-os-version       = "Debian-10.3"
-}
-
-packer {
-  required_plugins {
-    digitalocean = {
-      version = ">= 1.0.4"
-      source  = "github.com/digitalocean/digitalocean"
-    }
-  }
+  aws_security_group_id = "sg-037fd498b332442c1"
+  image_name            = "Meilisearch"
+  base-os-version       = "Debian-11"
 }
 
 variable "meilisearch_version" {
@@ -21,30 +13,71 @@ locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
 }
 
+packer {
+  required_plugins {
+    amazon = {
+      version = ">= 1.1.1"
+      source  = "github.com/hashicorp/amazon"
+    }
+    digitalocean = {
+      version = ">= 1.0.4"
+      source  = "github.com/digitalocean/digitalocean"
+    }
+    googlecompute = {
+      version = ">= 1.1.1"
+      source = "github.com/hashicorp/googlecompute"
+    }
+  }
+}
+
+source "amazon-ebs" "debian" {
+  ami_name        = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  instance_type   = "t2.small"
+  region          = "us-east-1"
+  ami_description = "MeiliSearch-${var.meilisearch_version} running on in ${var.base-os-version}"
+  source_ami_filter {
+    filters = {
+      name                = "debian-11-amd64*"
+      root-device-type    = "ebs"
+      virtualization-type = "hvm"
+    }
+    most_recent = true
+    owners      = ["136693071363"]
+  }
+  security_group_id = "${var.aws_security_group_id}"
+  ssh_username      = "admin"
+}
 
 source "digitalocean" "debian" {
   // you need the env variable DIGITALOCEAN_ACCESS_TOKEN locally
-  image        = "debian-10-x64"
+  droplet_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  snapshot_name= "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  image        = "debian-11-x64"
   region       = "lon1"
   size         = "s-1vcpu-2gb"
   ssh_username = "root"
-  droplet_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
-  snapshot_name= "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
   tags = [
     "MARKETPLACE",
     "AUTOBUILD",
   ]
 }
 
+source "googlecompute" "debian" {
+  //TODO: The image name has to be fixed
+  // image_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}-${local.timestamp}"
+  project_id = "meilisearchimage"
+  source_image = "debian-11-bullseye-v20230411"
+  ssh_username = "packer"
+  machine_type = "e2-small"
+  zone = "us-central1-a"
+}
+
 build {
   sources = [
-    "source.digitalocean.debian"
+    "source.amazon-ebs.debian",
+    "source.digitalocean.debian",
+    "sources.googlecompute.debian"
   ]
-
-  provisioner "shell" {
-    execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
-    script          = "scripts/nginx.sh"
-  }
 
   provisioner "file" {
     source      = "config/meilisearch.service"
@@ -72,9 +105,13 @@ build {
   }
 
   provisioner "shell" {
+    execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E '{{ .Path }}'"
+    script          = "scripts/nginx.sh"
+  }
+
+  provisioner "shell" {
     execute_command = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
     inline = [
-      "apt-get update -y -q",
       "mv /tmp/meilisearch.service /etc/systemd/system/meilisearch.service",
       "sed -i 's/provider_name/${source.type}/' /etc/systemd/system/meilisearch.service",
       "mv /tmp/nginx-meilisearch /etc/nginx/sites-enabled/meilisearch",

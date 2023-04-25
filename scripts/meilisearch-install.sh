@@ -10,7 +10,7 @@ wget --directory-prefix=/usr/bin/ -O /usr/bin/meilisearch https://github.com/mei
 chmod +x /usr/bin/meilisearch
 
 # Launch MeiliSearch
-# systemctl enable meilisearch.service
+systemctl enable meilisearch.service
 
 touch $MEILISEARCH_ENV_PATH
 
