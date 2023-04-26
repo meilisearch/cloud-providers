@@ -30,6 +30,8 @@
 - [📖 Providers available](#-providers-available)
 - [📖 Documentation](#-documentation)
 - [🔧 Prerequisites](#-prerequisites)
+- [🔑 Set your credentials](#-set-your-credentials)
+- [🚀 Getting Started](#-getting-started)
 
 ## 🎁 Content of this repository
 
@@ -41,7 +43,9 @@ These Packer build configurations are used primarily by the Meilisearch integrat
 
 | Cloud Provider |
 |----------|
-...
+| AWS |
+| DigitalOcean |
+| GCP |
 
 ## 📖 Documentation
 
@@ -51,3 +55,63 @@ See our [Documentation](https://docs.meilisearch.com/learn/tutorials/getting_sta
 
 You need the following to run the template:
 1. The [Packer CLI v1.8.6+](https://developer.hashicorp.com/packer/downloads) installed locally
+2. Obtain your [AWS access keys](https://docs.aws.amazon.com/keyspaces/latest/devguide/access.credentials.html)
+3. Obtain your [DigitalOcean API Token](https://www.digitalocean.com/docs/apis-clis/api/create-personal-access-token/)
+4. Obtain your [GCP credentials](https://cloud.google.com/docs/authentication/getting-started)
+
+## 🔑 Set your credentials
+
+- Aws
+``` bash
+export AWS_ACCESS_KEY_ID="YOUR_ACCESS_KEY"
+export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
+```
+- DigitalOcean
+```bash
+export DIGITALOCEAN_API_TOKEN="XxXxxxxXXxxXXxxXXxxxXXXxXxXxXX"
+```
+- GCP
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="path_to_your_creadential_file.json"
+```
+
+## 🚀 Getting Started
+
+### Initialize your Packer configuration
+Download and install packer plugins
+
+``` bash
+packer init .
+```
+
+### Build all the images
+
+⚠ Please note that this command will create all new Meilisearch images on all platforms of the specified version.
+
+``` bash
+packer build meilisearch.pkr.hcl
+```
+
+### Build an image just for one provider
+
+⚠ Please note that this command will create new Meilisearch image on the dedicated platforms of the specified version.
+
+``` bash
+packer build -only 'amazon-ebs.*' .
+```
+
+``` bash
+packer build -only 'digitalocean.*' .
+```
+
+``` bash
+packer build -only 'googlecompute.*' .
+```
+
+## 🚀 How to deploy Meilisearch 
+
+If you want to learn how to deploy a Meilisearch instance on DigitalOcean visit the dedicated page of our documentation:
+- [AWS](https://www.meilisearch.com/docs/learn/cookbooks/aws)
+- [DigitalOcean](https://www.meilisearch.com/docs/learn/cookbooks/digitalocean)
+- [GCP](https://www.meilisearch.com/docs/learn/cookbooks/gcp)
+
