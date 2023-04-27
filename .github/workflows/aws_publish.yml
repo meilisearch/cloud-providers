@@ -1,26 +1,19 @@
-name: Publish images to the cloud providers using Packer
+name: Publish AWS
 
 on:
-  push:
-    tags:
-      - v*
+  workflow_dispatch:
 
 env:
   PACKER_VERSION: "latest"
-  DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   publishing:
-    name: publish
+    name: publish-aws
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
-    - uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
 
     - name: Setup `packer`
       uses: hashicorp/setup-packer@main
@@ -34,4 +27,4 @@ jobs:
       run: "packer validate ."
     
     - name: Run `packer build`
-      run: "packer build ."
+      run: "packer build -only 'amazon-ebs.*' ."
