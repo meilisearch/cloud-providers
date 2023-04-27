@@ -1,7 +1,16 @@
-name: Publish AWS
+name: Publish Manually
 
 on:
   workflow_dispatch:
+    inputs:
+      provider:
+        type: choice
+        description: Choose the provider you want to publish
+        options:
+          - "amazon-ebs.debian"
+          - "digitalocean.debian"
+          - "googlecompute.debian"
+        required: true
 
 env:
   PACKER_VERSION: "latest"
@@ -23,8 +32,5 @@ jobs:
     - name: Run `packer init`
       run: "packer init ."
     
-    - name: Run `packer validate`
-      run: "packer validate ."
-    
     - name: Run `packer build`
-      run: "packer build -only 'amazon-ebs.*' ."
+      run: "packer build -only ${{ github.event.inputs.provider }} ."
