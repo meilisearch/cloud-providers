@@ -27,7 +27,10 @@ jobs:
 
     - name: Build image
       run: |
-        image_id=$(packer build -var 'image_name=temporary-iam-used-in-packer-testing' -machine-readable -only "amazon-ebs.*" meilisearch.pkr.hcl | awk -F, '$0 ~/artifact,0,id/ {print $6}' | cut -d ":" -f 2)
+        packer init .
+        image_id="$(packer build -var 'image_name=${{ github.run_id }}' -machine-readable -only "amazon-ebs.*" meilisearch.pkr.hcl | awk -F, '$0 ~/artifact,0,id/ {print $6}' | cut -d ":" -f 2)"
+        echo "hello"
+        echo "$image_id"
         echo $image_id
         echo "IMAGE_ID=$image_id" >> $GITHUB_ENV
 
@@ -46,11 +49,11 @@ jobs:
       run: |
         terraform init
         terraform apply -auto-approve -var ami_id=$IMAGE_ID
-        public_ip=$(terraform output public_ip)
+        public_ip="$(terraform output public_ip_address | cut -d "\"" -f 2)"
         echo "PUBLIC_IP=$public_ip" >> $GITHUB_ENV
     - name: Test that the instance is running
       run: |
-        sh .github/scripts/check-instance.sh ${{ env.PUBLIC_IP }}
+        sh .github/scripts/check_instance.sh ${{ env.PUBLIC_IP }}
     - name: Test that Meilisearch is running correctly
       run: |
         sh .github/scripts/check_meilisearch_availability.sh ${{ env.PUBLIC_IP }}
