@@ -7,9 +7,9 @@ on:
         type: choice
         description: Choose the provider you want to publish
         options:
-          - "amazon-ebs.debian"
-          - "digitalocean.debian"
-          - "googlecompute.debian"
+          - "amazon-ebs"
+          - "digitalocean"
+          - "googlecompute"
         required: true
 
 env:
@@ -19,7 +19,7 @@ env:
 
 jobs:
   publishing:
-    name: publish-aws
+    name: publish
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -33,4 +33,4 @@ jobs:
       run: "packer init ."
     
     - name: Run `packer build`
-      run: "packer build -only ${{ github.event.inputs.provider }} ."
+      run: "packer build -only ${{ github.event.inputs.provider }}.debian ."
