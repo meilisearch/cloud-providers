@@ -36,6 +36,8 @@ jobs:
 
     - name: check env
       run: echo ${{ env.IMAGE_ID }}
+    - name: check env
+      run: echo $IMAGE_ID
 
     - name: Install Terraform
       run: |

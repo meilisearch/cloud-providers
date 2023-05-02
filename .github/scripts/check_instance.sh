@@ -1,6 +1,8 @@
 #!/bin/bash
 
 PUBLIC_IP=$1
+echo "http://$PUBLIC_IP"
+echo $PUBLIC_IP
 start_time=$(date +%s)
 
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' --max-time 5 http://$PUBLIC_IP)" != "200" ]]; do
