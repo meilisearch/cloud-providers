@@ -1,13 +1,19 @@
-name: Publish images to the cloud providers using Packer
+name: Publish Manually
 
 on:
-  push:
-    tags:
-      - v*
+  workflow_dispatch:
+    inputs:
+      provider:
+        type: choice
+        description: Choose the provider you want to publish
+        options:
+          - "amazon-ebs"
+          - "digitalocean"
+          - "googlecompute"
+        required: true
 
 env:
   PACKER_VERSION: "latest"
-  DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -18,10 +24,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-
     - name: Setup `packer`
       uses: hashicorp/setup-packer@main
       with:
@@ -30,8 +32,5 @@ jobs:
     - name: Run `packer init`
       run: "packer init ."
     
-    - name: Run `packer validate`
-      run: "packer validate ."
-    
     - name: Run `packer build`
-      run: "packer build ."
+      run: "packer build -only ${{ github.event.inputs.provider }}.debian ."
