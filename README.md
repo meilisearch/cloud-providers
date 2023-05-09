@@ -34,8 +34,6 @@
 
 ## 🎁 Content of this repository
 
-:warning: This repository is in WIP.
-
 These Packer build configurations are used primarily by the Meilisearch integration team, aiming to provide our users simple ways to deploy and configure Meilisearch in the cloud by creating ready-made images of Meilisearch. As our heart resides in the open-source community, we maintain several of these tools as open-source repositories.
 
 ## ☁ Providers available
