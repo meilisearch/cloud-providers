@@ -86,7 +86,25 @@ packer build -only 'amazon-ebs.*' .
 There are multiple providers available for Packer, you can check the [External Plugins Documentation](https://developer.hashicorp.com/packer/plugins)
 
 To add a provider correctly to the list of existing providers, proceed as follows:
-1. Add your provider's code to the main `meilisearch.pkr.hcl` file as expected.
+1. Add your code to the primary meilisearch.pkr.hcl file as expected.
+  - Incorporate specific variables into the `variables` block at the beginning of the file if necessary.
+  - Introduce the plugin of your new provider into the `packer` block.:
+    ```
+    packer {
+    required_plugins {
+      ...
+      mynewprovider = {
+          ...
+        }
+      }
+    }
+    ```
+  - Lastly, you will need to create a new `source` block for your provider. To accomplish this, please consult the specific documentation for each plugin as your guide.
+    ```
+    source "mynewprovider" "debian" {
+      ...
+    }
+    ```
 2. Add the provider name to the [README](README.md#-providers-available).
 3. Add a manual trigger for your new provider to the CI by adding it to the list of suppliers in the `option` block of [manual_publish.yml](/manual_publish.yml).
 
