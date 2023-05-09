@@ -1,4 +1,3 @@
-<h1 align="center">⚠ WIP ⚠️</h1>
 <p align="center">
   <img src="https://github.com/meilisearch/integration-guides/blob/main/assets/logos/logo.svg" alt="Meilisearch Cloud Providers" width="200" height="200" />
 </p>
