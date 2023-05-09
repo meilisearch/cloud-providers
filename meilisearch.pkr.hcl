@@ -31,10 +31,36 @@ packer {
 }
 
 source "amazon-ebs" "debian" {
-  ami_name        = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
-  instance_type   = "t2.small"
-  region          = "us-east-1"
+  ami_name      = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
+  instance_type = "t2.small"
+  region        = "us-east-1"
+  ami_regions = [
+    "af-south-1",
+    "ap-east-1",
+    "ap-northeast-1",
+    "ap-northeast-2",
+    "ap-northeast-3",
+    "ap-south-1",
+    "ap-southeast-1",
+    "ap-southeast-2",
+    "ca-central-1",
+    "eu-central-1",
+    "eu-north-1",
+    "eu-south-1",
+    "eu-west-1",
+    "eu-west-2",
+    "eu-west-3",
+    "me-south-1",
+    "sa-east-1",
+    "us-east-1",
+    "us-east-2",
+    "us-west-1",
+    "us-west-2",
+  ]
   ami_description = "Meilisearch-${var.meilisearch_version} running on in ${var.base-os-version}"
+  ami_groups = [
+    "all"
+  ]
   source_ami_filter {
     filters = {
       name                = "debian-11-amd64*"
