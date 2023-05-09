@@ -1,0 +1,17 @@
+version: 2
+updates:
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "monthly"
+  labels:
+    - 'skip-changelog'
+    - 'dependencies'
+  rebase-strategy: disabled
+
+- package-ecosystem: gomod
+  directory: "/"
+  schedule:
+    interval: "monthly"
+  allow:
+    - dependency-name: "github.com/hashicorp/packer-plugin-sdk"
