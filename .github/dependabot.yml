@@ -8,3 +8,10 @@ updates:
     - 'skip-changelog'
     - 'dependencies'
   rebase-strategy: disabled
+
+- package-ecosystem: gomod
+  directory: "/"
+  schedule:
+    interval: "monthly"
+  allow:
+    - dependency-name: "github.com/hashicorp/packer-plugin-sdk"
