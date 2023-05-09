@@ -57,7 +57,7 @@ You need the following to run the template:
 1. The [Packer CLI v1.8.6+](https://developer.hashicorp.com/packer/downloads) installed locally
 2. Obtain your [AWS access keys](https://docs.aws.amazon.com/keyspaces/latest/devguide/access.credentials.html)
 3. Obtain your [DigitalOcean API Token](https://www.digitalocean.com/docs/apis-clis/api/create-personal-access-token/)
-4. Obtain your [GCP credentials](https://cloud.google.com/docs/authentication/getting-started)
+4. Obtain your [GCP credentials](https://cloud.google.com/docs/authentication/application-default-credentials)
 
 ## 🔑 Set your credentials
 
