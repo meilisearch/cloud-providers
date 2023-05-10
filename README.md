@@ -1,4 +1,3 @@
-<h1 align="center">⚠ WIP ⚠️</h1>
 <p align="center">
   <img src="https://github.com/meilisearch/integration-guides/blob/main/assets/logos/logo.svg" alt="Meilisearch Cloud Providers" width="200" height="200" />
 </p>
@@ -35,8 +34,6 @@
 - [🚀 Getting Started](#-getting-started)
 
 ## 🎁 Content of this repository
-
-:warning: This repository is in WIP.
 
 These Packer build configurations are used primarily by the Meilisearch integration team, aiming to provide our users simple ways to deploy and configure Meilisearch in the cloud by creating ready-made images of Meilisearch. As our heart resides in the open-source community, we maintain several of these tools as open-source repositories.
 
