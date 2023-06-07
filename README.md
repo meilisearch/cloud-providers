@@ -47,7 +47,7 @@ These Packer build configurations are used primarily by the Meilisearch integrat
 
 ## 📖 Documentation
 
-See our [Documentation](https://www.meilisearch.com/docs/learn/getting_started/installation) or our [API References](https://www.meilisearch.com/docs/reference/api/).
+See our [Documentation](https://www.meilisearch.com/docs/learn/getting_started/installation) or our [API References](https://www.meilisearch.com/docs/reference/api/overview).
 
 ## 🔧 Prerequisites
 
