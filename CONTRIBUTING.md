@@ -11,8 +11,8 @@ First of all, thank you for contributing to Meilisearch! This document aims to p
 ## Assumptions
 
 1. **You're familiar with [GitHub](https://github.com) and the [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)(PR) workflow.**
-2. **You've read the Meilisearch [documentation](https://docs.meilisearch.com) and the [README](/README.md).**
-3. **You know about the [Meilisearch community](https://docs.meilisearch.com/resources/contact.html). Please use this for help.**
+2. **You've read the Meilisearch [documentation](https://www.meilisearch.com/docs) and the [README](/README.md).**
+3. **You know about the [Meilisearch community](https://discord.com/invite/meilisearch). Please use this for help.**
 
 ## How to Contribute
 
