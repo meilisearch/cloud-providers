@@ -31,9 +31,9 @@ jobs:
         image_id="$(packer build -var 'image_name=${{ github.run_id }}' -machine-readable -only "amazon-ebs.*" meilisearch.pkr.hcl | awk -F, '$0 ~/artifact,0,id/ {print $6}' | cut -d ":" -f 2)"
         echo "IMAGE_ID=$image_id" >> $GITHUB_ENV
 
-    - name: check env
-      run: echo ${{ env.IMAGE_ID }}
-    - name: check env
+    - name: check env.IMAGE_ID
+      run: echo "${{ env.IMAGE_ID }}"
+    - name: check IMAGE_ID
       run: echo $IMAGE_ID
 
     - name: Install Terraform
@@ -59,6 +59,7 @@ jobs:
     - name: Destroy instance and AMI
       if: always()
       run: |
+        terraform init
         terraform destroy -var ami_id=$IMAGE_ID -auto-approve
 
   
