@@ -28,7 +28,9 @@ jobs:
     - name: Build image
       run: |
         packer init .
-        image_id="$(packer build -var 'image_name=${{ github.run_id }}' -machine-readable -only "amazon-ebs.*" meilisearch.pkr.hcl | awk -F, '$0 ~/artifact,0,id/ {print $6}' | cut -d ":" -f 2)"
+        build_res="$(packer build -var 'image_name=${{ github.run_id }}' -machine-readable -only "amazon-ebs.*" meilisearch.pkr.hcl)"
+        echo $build_res
+        image_id="$(echo $build_res | awk -F, '$0 ~/artifact,0,id/ {print $6}' | cut -d ":" -f 2)"
         echo "IMAGE_ID=$image_id" >> $GITHUB_ENV
 
     - name: check env.IMAGE_ID
