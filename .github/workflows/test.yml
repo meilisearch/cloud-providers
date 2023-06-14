@@ -15,15 +15,15 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      PACKER_VERSION: "latest"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Install Packer
-      run: |
-        wget https://releases.hashicorp.com/packer/1.7.7/packer_1.7.7_linux_amd64.zip # change version
-        unzip packer_1.7.7_linux_amd64.zip
-        sudo mv packer /usr/local/bin/
+      uses: hashicorp/setup-packer@main
+      with:
+        version: ${{ env.PACKER_VERSION }}
 
     - name: Build image
       run: |
