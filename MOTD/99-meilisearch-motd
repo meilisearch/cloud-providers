@@ -14,7 +14,7 @@ echo "________________________________________________        \e[39m";
 echo "                                                        ";
 echo "Welcome to your Meilisearch server                      ";
 echo "                                                        ";
-echo "    Documentation: https://docs.meilisearch.com         ";
+echo "    Documentation: https://www.meilisearch.com/docs     ";
 echo "    Sources: https://github.com/meilisearch/meilisearch ";
 echo "    Support: https://discorg.gg/meilisearch             ";
 echo "                                                        ";
