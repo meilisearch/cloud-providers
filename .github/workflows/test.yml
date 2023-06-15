@@ -1,0 +1,67 @@
+name: Test AWS image
+
+on:
+  pull_request:
+  push:
+    # trying and staging branches are for BORS config
+    branches:
+      - trying
+      - staging
+      - main
+
+jobs:
+  test-image:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      PACKER_VERSION: "latest"
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Packer
+      uses: hashicorp/setup-packer@main
+      with:
+        version: ${{ env.PACKER_VERSION }}
+
+    - name: Build image
+      run: |
+        packer init .
+        build_res="$(packer build -var 'image_name=${{ github.run_id }}' -machine-readable -only "amazon-ebs.*" meilisearch.pkr.hcl)"
+        echo $build_res
+        image_id="$(echo $build_res | awk -F, '$0 ~/artifact,0,id/ {print $6}' | cut -d ":" -f 2)"
+        echo "IMAGE_ID=$image_id" >> $GITHUB_ENV
+
+    - name: check env.IMAGE_ID
+      run: echo "${{ env.IMAGE_ID }}"
+    - name: check IMAGE_ID
+      run: echo $IMAGE_ID
+
+    - name: Install Terraform
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y curl unzip
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        sudo apt-get update && sudo apt-get install -y terraform
+
+    - name: Create instance
+      run: |
+        terraform init
+        terraform apply -auto-approve -var ami_id=$IMAGE_ID
+        public_ip="$(terraform output public_ip_address | cut -d "\"" -f 2)"
+        echo "PUBLIC_IP=$public_ip" >> $GITHUB_ENV
+    - name: Test that the instance is running
+      run: |
+        sh .github/scripts/check_instance.sh ${{ env.PUBLIC_IP }}
+    - name: Test that Meilisearch is running correctly
+      run: |
+        sh .github/scripts/check_meilisearch_availability.sh ${{ env.PUBLIC_IP }}
+    - name: Destroy instance and AMI
+      if: always()
+      run: |
+        terraform init
+        terraform destroy -var ami_id=$IMAGE_ID -auto-approve
+
+  
