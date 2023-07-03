@@ -1,0 +1,2 @@
+# Allow the documentation team to be informed when the PCB bucket address is updated.
+meilisearch.pkr.hcl @meilisearch/docs-team
