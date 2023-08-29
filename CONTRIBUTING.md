@@ -188,5 +188,16 @@ In the [DigitalOcean Vendor Portal](https://marketplace.digitalocean.com/vendorp
 
 This will start the DigitalOcean review process. This can take a few days, and the result will be notified via email to the DigitalOcean admin account. If the image is accepted, it will be automatically published on the Marketplace. If it is rejected, an email explaining the problems will be sent to administrators.
 
+### Create the Virtual disk (VMDK) for GCP <!-- omit in TOC -->
+
+In the [GCP website](https://console.cloud.google.com/)
+
+- Navigate to "Compute Engine" -> "Images"
+- Click on the image you just create `meilisearch-X-X-X-debian-X`
+- Click on `EXPORT`
+- On: "Export format" choose `VMDK`
+- On: "Path*" click on `BROWSE` and select `meilisearch-image`
+- Validate it by clicking on the SELECT button at the bottom
+- Finally click on the EXPORT button at the buttom
 
 Thank you again for reading this through, we can not wait to begin to work with you if you make your way through this contributing guide ❤️
