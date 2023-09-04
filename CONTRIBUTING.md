@@ -200,4 +200,30 @@ In the [GCP website](https://console.cloud.google.com/)
 - Validate it by clicking on the SELECT button at the bottom
 - Finally click on the EXPORT button at the buttom
 
+## Cleaning old images (Optional)
+
+You may want to clean up the old images.
+
+### Digital Ocean
+
+For Digital Ocean, each new image submitted deletes the old one.
+However if you have made a copy so that it is available from the dashboard:
+- Go to Manage
+- Click on image. You will then have access to the entire list of images
+- Click on more on the right and choose delete
+
+### GCP
+
+In this case there is no way to do it yet on GCP
+- Go to cloud-storage
+- Click on meilisearch-image. You will have access to a list of all vdmk images
+- Select the image you wish to delete
+- Click delete
+
+### AWS
+
+- Download this [obsolete repository](https://github.com/meilisearch/meilisearch-aws)
+- After making sure you have installed everything correctly(https://github.com/meilisearch/meilisearch-aws/blob/main/CONTRIBUTING.md#development-workflow)
+- Follow [this guide](https://github.com/meilisearch/meilisearch-aws/blob/main/CONTRIBUTING.md#clean-old-aws-ami-images-)
+
 Thank you again for reading this through, we can not wait to begin to work with you if you make your way through this contributing guide ❤️
