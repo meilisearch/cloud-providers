@@ -164,18 +164,20 @@ git push origin vX.X.X
 ```
 This will start building and publishing all images on all platforms.
 
-### Publish each image manually <!-- omit in TOC -->
-
-In case a publication did not go well, you can manually launch each building image separately in the GitHub interface.
+💡 You can publish each image manually if a publication did not go well: you can manually launch each building image separately in the GitHub interface.
 - Click on the Action tab.
 - Choose the "Publish Manually" action on the left sidebar.
 - On the right side of the screen, select the `Use workflow from` panel.
 - On `Use workflow from` keep `Branch: main`.
 - On `Choose the provider you want to publish` select the provider you want to re-deploy.
 
+### Publish the AWS image <!-- omit in TOC -->
+
+Nothing to do! The image is immediatly available on AWS. You can see the new created image [here](https://us-east-1.console.aws.amazon.com/ec2/home) (Images -> AMI)
+
 ### Publish the DigitalOcean image <!-- omit in TOC -->
 
-In the [DigitalOcean Vendor Portal](https://marketplace.digitalocean.com/vendorportal), click on the title of the `Meilisearch` image. A form will open for a new image submission. Update the information regarding the latest version in the document:
+In the [DigitalOcean Vendor Portal](https://cloud.digitalocean.com/vendorportal), click on the title of the `MeiliSearch` image (type: `Droplet 1-Click`). A form will open for a new image submission. Update the information regarding the latest version in the document:
 
 - Update the `App version` (with the version number, without the starting v, so `vX.X.X` becomes `X.X.X`).
 - In the `System image` field, click `Select system image` and select the image you tested from the list (`Meilisearch-v.X.X.X-Debian-X`).
@@ -190,15 +192,18 @@ This will start the DigitalOcean review process. This can take a few days, and t
 
 ### Create the Virtual disk (VMDK) for GCP <!-- omit in TOC -->
 
-In the [GCP website](https://console.cloud.google.com/)
+In the [GCP console](https://console.cloud.google.com/)
 
+- Ensure you selected the `MeiliSearchImage` project in the GCP console
 - Navigate to "Compute Engine" -> "Images"
-- Click on the image you just create `meilisearch-X-X-X-debian-X`
+- Click on the image you just created `meilisearch-X-X-X-debian-X`
 - Click on `EXPORT`
 - On: "Export format" choose `VMDK`
 - On: "Path*" click on `BROWSE` and select `meilisearch-image`
 - Validate it by clicking on the SELECT button at the bottom
 - Finally click on the EXPORT button at the buttom
+
+The new image should appear in the list. It might take a few minutes.
 
 ## Cleaning old images (Optional)
 
@@ -206,24 +211,24 @@ You may want to clean up the old images.
 
 ### Digital Ocean
 
-For Digital Ocean, each new image submitted deletes the old one.
+For DigitalOcean, each new image submitted deletes the old one.
+
 However if you have made a copy so that it is available from the dashboard:
-- Go to Manage
-- Click on image. You will then have access to the entire list of images
-- Click on more on the right and choose delete
+- Go to the [DO console](https://cloud.digitalocean.com)
+- Go to Images -> Manage (left side bar)
+- On the list of image, for the chosen image, click on `More` -> `Delete`
 
 ### GCP
 
-In this case there is no way to do it yet on GCP
-- Go to cloud-storage
-- Click on meilisearch-image. You will have access to a list of all vdmk images
-- Select the image you wish to delete
-- Click delete
+- Go to Cloud-storage: [GCP console](https://console.cloud.google.com/) > Cloud Storage
+- Click on `meilisearch-image``. You will have access to a list of all vdmk images
+- Select the images you wish to delete
+- Click on DELETE (at top of the list)
 
 ### AWS
 
-- Download this [obsolete repository](https://github.com/meilisearch/meilisearch-aws)
-- After making sure you have installed everything correctly(https://github.com/meilisearch/meilisearch-aws/blob/main/CONTRIBUTING.md#development-workflow)
-- Follow [this guide](https://github.com/meilisearch/meilisearch-aws/blob/main/CONTRIBUTING.md#clean-old-aws-ami-images-)
+- Download this [repository](https://github.com/meilisearch/meilisearch-aws) (don't worry it's an archived repository but we can still use the script)
+- Make sure you have done the [required installation](https://github.com/meilisearch/meilisearch-aws/blob/main/CONTRIBUTING.md#development-workflow) and [set up your AWS credentials](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html).
+- Follow [this guide](https://github.com/meilisearch/meilisearch-aws/blob/main/CONTRIBUTING.md#clean-old-aws-ami-images-) to delete the chosen images
 
 Thank you again for reading this through, we can not wait to begin to work with you if you make your way through this contributing guide ❤️
