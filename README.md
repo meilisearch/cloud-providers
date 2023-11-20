@@ -73,7 +73,7 @@ export AWS_SECRET_ACCESS_KEY="YOUR_SECRET_KEY"
 ```
 - DigitalOcean
 ```bash
-export DIGITALOCEAN_API_TOKEN="XxXxxxxXXxxXXxxXXxxxXXXxXxXxXX"
+export DIGITALOCEAN_TOKEN="XxXxxxxXXxxXXxxXXxxxXXXxXxXxXX"
 ```
 - GCP
 ```bash
