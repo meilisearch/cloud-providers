@@ -6,7 +6,7 @@ First of all, thank you for contributing to Meilisearch! This document aims to p
 - [How to Contribute](#how-to-contribute)
 - [Development Workflow](#development-workflow)
 - [Git Guidelines](#git-guidelines)
-- [Release Process (for the internal team only)](#release-process-for-internal-team-only)
+- [Release Process (for the internal team only)](#release-process-for-the-internal-team-only)
 
 ## Assumptions
 
