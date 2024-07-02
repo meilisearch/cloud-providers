@@ -16,15 +16,15 @@ locals {
 packer {
   required_plugins {
     amazon = {
-      version = ">= 1.1.1"
+      version = "~> 1"
       source  = "github.com/hashicorp/amazon"
     }
     digitalocean = {
-      version = ">= 1.0.4"
+      version = "~> 1"
       source  = "github.com/digitalocean/digitalocean"
     }
     googlecompute = {
-      version = ">= 1.1.1"
+      version = "~> 1"
       source  = "github.com/hashicorp/googlecompute"
     }
   }
