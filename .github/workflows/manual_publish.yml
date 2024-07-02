@@ -1,4 +1,4 @@
-name: "Publish Manually ${{ github.event.inputs.provider }}"
+name: "Publish Manually"
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ env:
 
 jobs:
   publishing:
-    name: "publishing to ${{ github.event.inputs.provider }}"
+    name: publishing
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
