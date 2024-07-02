@@ -7,7 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update -y -q
 
 # Install packages
-apt-get install -y nginx ufw certbot python3-certbot-nginx
+apt-get install -y --fix-missing nginx ufw certbot python3-certbot-nginx
 
 # Remove the default virtualhost symlink
 rm /etc/nginx/sites-enabled/default
