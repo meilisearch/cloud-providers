@@ -116,7 +116,7 @@ packer build -only 'googlecompute.*' .
 ## 🚀 How to deploy Meilisearch 
 
 If you want to learn how to deploy a Meilisearch instance on DigitalOcean visit the dedicated page of our documentation:
-- [AWS](https://www.meilisearch.com/docs/learn/cookbooks/aws)
-- [DigitalOcean](https://www.meilisearch.com/docs/learn/cookbooks/digitalocean)
-- [GCP](https://www.meilisearch.com/docs/learn/cookbooks/gcp)
+- [AWS](https://www.meilisearch.com/docs/guides/deployment/aws)
+- [DigitalOcean](https://www.meilisearch.com/docs/guides/deployment/digitalocean)
+- [GCP](https://www.meilisearch.com/docs/guides/deployment/gcp)
 
