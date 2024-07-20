@@ -44,6 +44,7 @@ source "amazon-ebs" "debian" {
     "ap-southeast-1",
     "ap-southeast-2",
     "ca-central-1",
+    "ca-west-1",
     "eu-central-1",
     "eu-north-1",
     "eu-south-1",
