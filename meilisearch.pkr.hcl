@@ -6,7 +6,7 @@ variables {
 
 variable "meilisearch_version" {
   type    = string
-  default = "v1.10.0"
+  default = "v1.11.0"
 }
 
 locals {
