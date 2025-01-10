@@ -7,6 +7,8 @@ Type=simple
 Environment="MEILI_SERVER_PROVIDER=provider_name"
 Environment="MEILI_DUMP_DIR=/var/opt/meilisearch/dumps"
 ExecStart=/usr/bin/meilisearch --db-path /var/lib/meilisearch/data.ms --env development --dump-dir $MEILI_DUMP_DIR
+Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=default.target
