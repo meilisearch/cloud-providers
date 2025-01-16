@@ -18,10 +18,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-
     - name: Setup `packer`
       uses: hashicorp/setup-packer@main
       with:
@@ -29,9 +25,9 @@ jobs:
 
     - name: Run `packer init`
       run: "packer init ."
-    
+
     - name: Run `packer validate`
       run: "packer validate ."
-    
+
     - name: Run `packer build`
       run: "packer build ."

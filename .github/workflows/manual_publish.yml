@@ -9,7 +9,6 @@ on:
         options:
           - "amazon-ebs"
           - "digitalocean"
-          - "googlecompute"
         required: true
 
 env:
@@ -25,10 +24,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: 'google-github-actions/auth@v2'
-      with:
-        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-
     - name: Setup `packer`
       uses: hashicorp/setup-packer@main
       with:
@@ -36,6 +31,6 @@ jobs:
 
     - name: Run `packer init`
       run: "packer init ."
-    
+
     - name: Run `packer build`
       run: "packer build -only ${{ github.event.inputs.provider }}.debian ."
