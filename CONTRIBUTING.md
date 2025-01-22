@@ -42,15 +42,6 @@ Before running any script, make sure to [obtain a DigitalOcean API Token](https:
   ```bash
   export DIGITALOCEAN_ACCESS_TOKEN="XxXxxxxXXxxXXxxXXxxxXXXxXxXxXX"
   ```
-- GCP:
-Obtain your [GCP credentials](https://cloud.google.com/docs/authentication/getting-started) and set it in your environment:
-  ```bash
-  export GOOGLE_APPLICATION_CREDENTIALS="path_to_your_creadential_file.json"
-  ```
-3. Download and install Packer plugins
-    ``` bash
-    packer init .
-    ```
 
 ### Tests and Linter <!-- omit in toc -->
 
@@ -190,21 +181,6 @@ In the [DigitalOcean Vendor Portal](https://cloud.digitalocean.com/vendorportal)
 
 This will start the DigitalOcean review process. This can take a few days, and the result will be notified via email to the DigitalOcean admin account. If the image is accepted, it will be automatically published on the Marketplace. If it is rejected, an email explaining the problems will be sent to administrators.
 
-### Create the Virtual disk (VMDK) for GCP <!-- omit in TOC -->
-
-In the [GCP console](https://console.cloud.google.com/)
-
-- Ensure you selected the `MeiliSearchImage` project in the GCP console
-- Navigate to "Compute Engine" -> "Images"
-- Click on the image you just created `meilisearch-X-X-X-debian-X`
-- Click on `EXPORT`
-- On: "Export format" choose `VMDK`
-- On: "Path*" click on `BROWSE` and select `meilisearch-image`
-- Validate it by clicking on the SELECT button at the bottom
-- Finally click on the EXPORT button at the buttom
-
-The new image should appear in the list. It might take a few minutes.
-
 ## Cleaning old images (Optional)
 
 You may want to clean up the old images.
@@ -217,13 +193,6 @@ However if you have made a copy so that it is available from the dashboard:
 - Go to the [DO console](https://cloud.digitalocean.com)
 - Go to Images -> Manage (left side bar)
 - On the list of image, for the chosen image, click on `More` -> `Delete`
-
-### GCP
-
-- Go to Cloud-storage: [GCP console](https://console.cloud.google.com/) > Cloud Storage
-- Click on `meilisearch-image``. You will have access to a list of all vdmk images
-- Select the images you wish to delete
-- Click on DELETE (at top of the list)
 
 ### AWS
 

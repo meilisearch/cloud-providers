@@ -23,10 +23,6 @@ packer {
       version = "~> 1"
       source  = "github.com/digitalocean/digitalocean"
     }
-    googlecompute = {
-      version = "~> 1"
-      source  = "github.com/hashicorp/googlecompute"
-    }
   }
 }
 
@@ -88,19 +84,10 @@ source "digitalocean" "debian" {
   ]
 }
 
-source "googlecompute" "debian" {
-  image_name          = lower(replace("${var.image_name}-${var.meilisearch_version}-${var.base-os-version}", ".", "-"))
-  project_id          = "meilisearchimage"
-  source_image_family = "debian-11"
-  ssh_username        = "packer"
-  zone                = "us-central1-a"
-}
-
 build {
   sources = [
     "source.amazon-ebs.debian",
     "source.digitalocean.debian",
-    "source.googlecompute.debian"
   ]
 
   provisioner "file" {
@@ -167,12 +154,4 @@ build {
     only = ["digitalocean.debian"]
   }
 
-  // This prevents image creation failure when Install guest packages is checked.
-  provisioner "shell" {
-    execute_command = "echo 'packer' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
-    inline = [
-      "sudo apt-get remove google-cloud-cli -y",
-    ]
-    only = ["googlecompute.debian"]
-  }
 }
