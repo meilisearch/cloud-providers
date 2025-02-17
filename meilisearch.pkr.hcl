@@ -9,6 +9,11 @@ variable "meilisearch_version" {
   default = "v1.13"
 }
 
+variable "digitalocean_access_token" {
+  type    = string
+  default = env("DIGITALOCEAN_ACCESS_TOKEN")
+}
+
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
 }
@@ -72,6 +77,7 @@ source "amazon-ebs" "debian" {
 }
 
 source "digitalocean" "debian" {
+  api_token     = "${var.digitalocean_access_token}"
   droplet_name  = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
   snapshot_name = "${var.image_name}-${var.meilisearch_version}-${var.base-os-version}"
   image         = "debian-11-x64"
