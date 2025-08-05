@@ -6,7 +6,7 @@ variables {
 
 variable "meilisearch_version" {
   type    = string
-  default = "v1.15.0"
+  default = "v1.16.0"
 }
 
 variable "digitalocean_access_token" {
