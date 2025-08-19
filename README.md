@@ -18,8 +18,22 @@
   <a href="https://github.com/meilisearch/cloud-providers/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
   <a href="https://ms-bors.herokuapp.com/repositories/51"><img src="https://bors.tech/images/badge_small.svg" alt="Bors enabled"></a>
 </p>
-
+<p align="center">⚠️ Project Archived – Official Images Deprecated </p>
 <p align="center">☁ Meilisearch tools for the Cloud ☁</p>
+
+> **We are no longer maintaining or publishing the official Meilisearch one-click deploy images on AWS Marketplace and DigitalOcean Marketplace**.
+>
+> If you are currently using these images, to keep receiving the latest features and updates:
+>
+> - You can either deploy Meilisearch yourself (Docker, binary, or Helm chart)
+> - Or use [Meilisearch Cloud](https://cloud.meilisearch.com/login), which offers flexible pricing (resource-based or usage-based). With Meilisearch Cloud, deployment and scaling are fully managed, and updates are applied automatically — making it the easiest way to always stay up to date.
+>
+> :arrow_right: For larger companies or teams with specific needs (including migration support), you can book a meeting with our sales team at sales@meilisearch.com.
+> 
+> :bulb: If you are running Meilisearch on your own infrastructure but need support for specific features, we also offer commercial licenses. Contact us to learn more at sales@meilisearch.com.
+>
+> :envelope_with_arrow: If you wish to maintain an official image of Meilisearch on AWS or DigitalOcean, please reach out at bonjour@meilisearch.com — we’ll be happy to accommodate.
+This repository is now archived and will no longer receive updates.
 
 **Meilisearch Cloud Providers** is a set of tools and scripts allowing to build Meilisearch images for multiple platforms made with [Packer](https://www.packer.io/).
 
