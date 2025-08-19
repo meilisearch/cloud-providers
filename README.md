@@ -2,7 +2,8 @@
   <img src="https://github.com/meilisearch/integration-guides/blob/main/assets/logos/logo.svg" alt="Meilisearch Cloud Providers" width="200" height="200" />
 </p>
 
-<h1 align="center">Meilisearch Cloud Providers</h1>
+<h1 align="center">⚠️ Project Archived – Official Images Deprecated </h1>
+<h2 align="center">Meilisearch Cloud Providers</h2>
 
 <h4 align="center">
   <a href="https://github.com/meilisearch/meilisearch">Meilisearch</a> |
@@ -18,10 +19,9 @@
   <a href="https://github.com/meilisearch/cloud-providers/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-informational" alt="License"></a>
   <a href="https://ms-bors.herokuapp.com/repositories/51"><img src="https://bors.tech/images/badge_small.svg" alt="Bors enabled"></a>
 </p>
-<p align="center">⚠️ Project Archived – Official Images Deprecated </p>
 <p align="center">☁ Meilisearch tools for the Cloud ☁</p>
 
-> **We are no longer maintaining or publishing the official Meilisearch one-click deploy images on AWS Marketplace and DigitalOcean Marketplace**.
+> ⚠️ **We are no longer maintaining or publishing the official Meilisearch one-click deploy images on AWS Marketplace and DigitalOcean Marketplace**.
 >
 > If you are currently using these images, to keep receiving the latest features and updates:
 >
